@@ -1,0 +1,57 @@
+/* Drifting orange light behind the whole site.
+   Two fixed, very soft glow layers move slowly at different speeds.
+   Loaded after style.css; remove the <link> to switch it off. */
+
+html::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* layer 1: big warm glows, slow drift */
+html::before {
+  inset: -25%;
+  background:
+    radial-gradient(24% 22% at 10% 16%, rgba(242, 110, 54, .15), transparent 70%),
+    radial-gradient(26% 22% at 90% 40%, rgba(255, 130, 70, .10), transparent 70%),
+    radial-gradient(25% 22% at 20% 80%, rgba(216, 85, 30, .12), transparent 70%);
+  animation: glowA 38s ease-in-out infinite alternate;
+}
+
+/* layer 2: smaller accent glows, drifting the other way a bit faster */
+body::after {
+  inset: -25%;
+  background:
+    radial-gradient(20% 18% at 80% 12%, rgba(242, 110, 54, .10), transparent 70%),
+    radial-gradient(22% 18% at 74% 86%, rgba(242, 110, 54, .12), transparent 70%),
+    radial-gradient(18% 16% at 6% 52%, rgba(255, 130, 70, .08), transparent 70%);
+  animation: glowB 27s ease-in-out infinite alternate;
+}
+
+@keyframes glowA {
+  from { transform: translate3d(-4%, -3%, 0) scale(1); }
+  to   { transform: translate3d(5%, 4%, 0) scale(1.12); }
+}
+@keyframes glowB {
+  from { transform: translate3d(4%, 3%, 0) scale(1.08); }
+  to   { transform: translate3d(-5%, -4%, 0) scale(.96); }
+}
+
+/* page content sits above the glow */
+main { position: relative; z-index: 1; }
+footer { z-index: 1; }
+
+/* sections that were solid black become slightly see-through so the glow shows */
+.dark { background: rgba(8, 8, 8, .6); }
+.sec[style*="--st"] { background: rgba(15, 15, 15, .6) !important; }
+.partners { background: linear-gradient(180deg, rgba(20, 20, 20, .6) 0%, rgba(12, 12, 12, .6) 100%); }
+
+@media (max-width: 860px) {
+  html::before, body::after { opacity: .75; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html::before, body::after { animation: none; }
+}

@@ -1,0 +1,64 @@
+/* Brick-wall footer. Loaded after style.css so it overrides the old footer layout.
+   The Explore links (.ft-links) are intentionally NOT restyled: they keep the
+   original two-column layout from style.css. */
+
+body > footer {
+  padding: 48px 0 0;
+  background: #140f0d url("../images/footer-bricks.png") center / cover no-repeat;
+  overflow: hidden;
+}
+
+/* dark veil over the bricks so text stays readable (the orange top line from
+   style.css, footer::before, is kept and sits above it) */
+body > footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 8, 7, .5), rgba(10, 8, 7, .78));
+  pointer-events: none;
+}
+body > footer::before { z-index: 2; }
+body > footer > * { position: relative; z-index: 1; }
+
+/* full-width footer: same left/right margins as the header, so the logo lines
+   up under the header logo and the contact info reaches the right edge */
+body > footer .w {
+  max-width: none;
+  padding-left: clamp(16px, 2vw, 36px);
+  padding-right: clamp(24px, 5vw, 96px);
+}
+
+/* three columns: brand (left) | Explore (middle, unchanged) | contact (right) */
+body > footer .ft {
+  grid-template-columns: 1fr auto 1fr;
+  column-gap: clamp(32px, 6vw, 96px);
+  row-gap: 32px;
+  align-items: start;
+}
+
+/* logo + tagline pinned left, no wasted space */
+body > footer .ft-brand { justify-self: start; text-align: left; max-width: 340px; }
+body > footer .ft-brand img { height: 72px; }
+body > footer .ft-tag { margin: 14px 0 16px; color: #e3d6cd; }
+
+/* contact info on the right margin */
+body > footer .ft > div:last-child { justify-self: end; text-align: right; }
+body > footer .ft-contact { justify-items: end; }
+body > footer .ft-contact a { color: #e3d6cd; }
+body > footer .ft-contact a:hover { color: var(--or); }
+
+body > footer .ft-links a { color: #e3d6cd; }
+body > footer .ft-links a:hover { color: var(--or); }
+
+body > footer .ft-bar {
+  margin-top: 32px;
+  border-top-color: rgba(255, 255, 255, .14);
+  color: #b9aaa0;
+}
+
+@media (max-width: 860px) {
+  body > footer { padding-top: 40px; }
+  body > footer .ft { grid-template-columns: 1fr; }
+  body > footer .ft > div:last-child { justify-self: start; text-align: left; }
+  body > footer .ft-contact { justify-items: start; }
+}

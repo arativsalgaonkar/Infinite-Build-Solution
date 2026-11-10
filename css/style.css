@@ -105,7 +105,7 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 14px max(20px, calc((100% - 1200px) / 2));
+  padding: 14px clamp(24px, 5vw, 96px) 14px clamp(16px, 2vw, 36px);
   max-width: none;
   margin: 0;
 }
@@ -130,7 +130,6 @@ nav {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-right: -16px;
 }
 
 nav a {
@@ -572,12 +571,14 @@ nav a.on {
 
 .peek {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-.peek .a { grid-row: span 2; min-height: 640px; }
+.peek .card, .peek .a { min-height: 300px; }
+.peek .card .b { padding-top: 70px; }
+.peek .card small:first-of-type { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+.peek .card small + small { display: none; }
 
 /* --------------------------------------------------------------------------
    Abroad Gallery — Uniform Shape Changing & Zoom Speed
@@ -712,6 +713,140 @@ nav a.on {
 .blog-desc { color: var(--fg-sec); font-size: 0.98rem; line-height: 1.7; margin-bottom: 26px; flex-grow: 1; }
 
 .blog-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--fg-mut);
+}
+
+.blog-author { color: #ffffff; font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   About, Mission, & Founder Section — Executive Studio Presentation
+   -------------------------------------------------------------------------- */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 20px; margin-top: 8px; }
+.facts b { display: block; font: 800 2.4rem "Archivo", sans-serif; color: #ffffff; }
+
+.pc {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-warm);
+  border-radius: 24px;
+  padding: 50px 44px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+}
+
+.pc .mut { color: var(--fg-sec); }
+
+/* Founder & CEO Card */
+.founder-card {
+  background: linear-gradient(145deg, rgba(19, 19, 19, 0.75) 0%, rgba(13, 13, 13, 0.9) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-warm);
+  border-radius: 24px;
+  padding: 52px 48px;
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 52px;
+  align-items: center;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(242, 110, 54, 0.12);
+}
+
+.founder-media { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+.founder-img-wrap {
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 1/1.2;
+  border-radius: 18px;
+  border: 1px solid rgba(242, 110, 54, 0.25);
+  overflow: hidden;
+  position: relative;
+  background: #111111;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+.founder-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.founder-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #131313 0%, #0c0c0c 100%);
+  color: var(--fg-sec);
+  padding: 24px;
+  text-align: center;
+}
+
+.founder-placeholder svg { width: 72px; height: 72px; fill: var(--or); margin-bottom: 14px; opacity: 0.9; }
+.founder-placeholder span { font-size: 0.92rem; color: #b5b5b5; line-height: 1.5; }
+.founder-placeholder b { color: #fff; display: block; font-size: 1.05rem; margin-bottom: 4px; }
+
+.founder-name-tag { text-align: center; }
+.founder-name-tag h3 { font-size: 1.5rem; font-weight: 800; color: #fff; margin: 0 0 4px; }
+.founder-name-tag p { color: var(--or); font-weight: 700; font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; margin: 0; }
+
+.founder-bio { display: flex; flex-direction: column; justify-content: center; }
+.founder-eyebrow { color: var(--or); font: 700 0.8rem "Archivo", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px; }
+.founder-bio h2 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); font-weight: 800; color: #fff; margin-bottom: 20px; }
+.founder-bio h2::before { display: none !important; }
+.founder-bio p { color: var(--fg-sec); font-size: 1.05rem; line-height: 1.75; margin-bottom: 18px; }
+
+.founder-quote {
+  border-left: 2px solid var(--or);
+  padding-left: 20px;
+  margin: 16px 0 0;
+  font-style: italic;
+  color: #e2e2e2;
+  font-size: 1.05rem;
+}
+
+/* About the firm card (matches founder card) */
+.about-stats { width: 100%; border: 1px solid rgba(242, 110, 54, 0.25); border-radius: 18px; background: rgba(255, 255, 255, 0.02); overflow: hidden; }
+.about-stats div { padding: 22px 26px; border-bottom: 1px solid var(--border); font-size: 0.92rem; color: var(--fg-sec); }
+.about-stats div:last-child { border-bottom: 0; }
+.about-stats b { display: block; font: 800 2.2rem "Archivo", sans-serif; color: #ffffff; letter-spacing: -0.03em; }
+.about-card .founder-eyebrow { margin-bottom: 10px; }
+
+/* --------------------------------------------------------------------------
+   Contact Form & Details
+   -------------------------------------------------------------------------- */
+form { display: grid; gap: 20px; }
+label { font-weight: 600; font-size: 0.95rem; display: grid; gap: 8px; color: #d6d6d6; }
+
+input, select, textarea {
+  font: inherit;
+  padding: 15px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-warm);
+  background: rgba(16, 16, 16, 0.85);
+  color: #fff;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 0;
+  border-color: var(--or);
+  box-shadow: 0 0 20px var(--or-glow);
+}
+
+.info p { margin-bottom: 1.6em; }
+.info b { display: block; color: var(--or); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+
+
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+footer {
   background: #000000;
   color: #8f8f8f;
   padding: 72px 0 0;
@@ -780,7 +915,7 @@ footer a:hover { color: var(--or); }
   header nav a { padding: 14px 16px; font-size: 1.05rem; border-radius: 10px; }
   .two, .peek, .sp-grid { grid-template-columns: 1fr; }
   .ft { grid-template-columns: 1fr; gap: 36px; }
-  .peek .a { grid-row: auto; min-height: 380px; }
+  .peek .card, .peek .a { min-height: 300px; }
   .stats { grid-template-columns: 1fr; gap: 20px 0; margin-top: -20px; padding: 26px 18px; }
   .stats div { border-left: 0; border-bottom: 1px solid var(--border); padding: 0 10px 18px; }
   .stats div:last-child { border-bottom: 0; padding-bottom: 0; }
@@ -809,6 +944,27 @@ footer a:hover { color: var(--or); }
 .marquee.run:hover .mq-track { animation-play-state: paused; }
 @keyframes mq { to { transform: translateX(-50%); } }
 @media (max-width: 860px) { .mq-item { width: 170px; height: 92px; margin-right: 14px; padding: 14px 16px; } .marquee.run .mq-track { animation-duration: 40s; } }
+
+/* --------------------------------------------------------------------------
+   Partners band & footer separation
+   -------------------------------------------------------------------------- */
+.partners.sec { padding: 90px 0 52px; }
+.partners {
+  background: linear-gradient(180deg, #141414 0%, #0c0c0c 100%);
+  border-top: 1px solid rgba(242, 110, 54, 0.45);
+}
+
+footer { position: relative; background: #040404; border-top: 0; }
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--or) 30%, var(--or-bright) 50%, var(--or) 70%, transparent);
+  box-shadow: 0 0 24px var(--or-glow);
+}
 
 .rv { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
 .rv.in { opacity: 1; transform: none; }

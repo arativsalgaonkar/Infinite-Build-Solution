@@ -169,14 +169,15 @@ if(fm) fm.onsubmit=function(e){
   addEventListener("hashchange",c);
 })();
 (function(){
-  var m=document.querySelector(".marquee");
-  if(!m||matchMedia("(prefers-reduced-motion:reduce)").matches) return;
-  var t=m.querySelector(".mq-track");
-  [].slice.call(t.children).forEach(function(it){
-    var c=it.cloneNode(true);
-    c.setAttribute("aria-hidden","true");
-    [].forEach.call(c.querySelectorAll("img"),function(i){i.alt="";i.removeAttribute("loading")});
-    t.appendChild(c);
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  [].forEach.call(document.querySelectorAll(".marquee"),function(m){
+    var t=m.querySelector(".mq-track");
+    [].slice.call(t.children).forEach(function(it){
+      var c=it.cloneNode(true);
+      c.setAttribute("aria-hidden","true");
+      [].forEach.call(c.querySelectorAll("img"),function(i){i.alt="";i.removeAttribute("loading")});
+      t.appendChild(c);
+    });
+    m.classList.add("run");
   });
-  m.classList.add("run");
 })();

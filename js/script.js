@@ -168,3 +168,15 @@ if(fm) fm.onsubmit=function(e){
   n.addEventListener("click",function(e){if(e.target.tagName=="A")c()});
   addEventListener("hashchange",c);
 })();
+(function(){
+  var m=document.querySelector(".marquee");
+  if(!m||matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  var t=m.querySelector(".mq-track");
+  [].slice.call(t.children).forEach(function(it){
+    var c=it.cloneNode(true);
+    c.setAttribute("aria-hidden","true");
+    [].forEach.call(c.querySelectorAll("img"),function(i){i.alt="";i.removeAttribute("loading")});
+    t.appendChild(c);
+  });
+  m.classList.add("run");
+})();

@@ -105,19 +105,24 @@ header {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 16px 28px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 14px max(20px, calc((100% - 1200px) / 2));
+  max-width: none;
+  margin: 0;
 }
 
 .nav img {
-  height: 48px;
+  height: 68px;
+  width: auto;
   display: block;
   background: #ffffff;
-  border-radius: 8px;
-  padding: 4px 10px;
-  transition: opacity 0.2s ease;
+  border: 2px solid var(--or);
+  border-radius: 14px;
+  padding: 7px 16px;
+  box-shadow: 0 0 26px var(--or-glow);
+  transition: opacity 0.2s ease, box-shadow 0.3s ease;
 }
+
+.nav a:hover img { box-shadow: 0 0 34px rgba(242, 110, 54, 0.5); }
 
 .nav img:hover { opacity: 0.95; }
 
@@ -125,6 +130,7 @@ nav {
   display: flex;
   gap: 8px;
   align-items: center;
+  margin-right: -16px;
 }
 
 nav a {
@@ -234,7 +240,7 @@ nav a.on {
   z-index: 1;
 }
 
-.bn.tall { min-height: calc(100svh - 112px); }
+.bn.tall { min-height: calc(100svh - 132px); }
 .bn.tall .w { padding-top: 90px; padding-bottom: 112px; }
 .bn.tall h1 { font-size: clamp(2.2rem, 4.6vw, 4.2rem); max-width: 22ch; }
 .bn.tall p { margin: 20px 0 28px; }
@@ -714,7 +720,7 @@ nav a.on {
 }
 
 .ft { display: grid; grid-template-columns: 1.3fr 1.2fr 1fr; gap: 56px; align-items: start; }
-footer img { height: 84px; width: auto; background: #fff; border-radius: 10px; padding: 6px 14px; display: block; }
+footer img { height: 84px; width: auto; background: #fff; border: 2px solid var(--or); border-radius: 14px; padding: 7px 16px; display: block; }
 .ft-tag { margin: 16px 0 20px; max-width: none; color: #b5b5b5; font: 500 0.95rem/1.5 "Public Sans", sans-serif; letter-spacing: 0.02em; text-transform: none; }
 .ft-h { display: block; color: var(--or); font: 700 0.78rem "Archivo", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 18px; }
 .ft-links { display: grid; grid-template-rows: repeat(3, auto); grid-auto-flow: column; gap: 4px 36px; justify-content: start; }
@@ -735,6 +741,9 @@ footer a:hover { color: var(--or); }
 .mb { display: none; }
 
 @media (max-width: 860px) {
+  .nav { padding: 12px; }
+  .nav img { height: 52px; padding: 5px 12px; border-radius: 12px; }
+  nav { margin-right: 0; }
   .mb {
     display: flex;
     flex-direction: column;
@@ -780,6 +789,26 @@ footer a:hover { color: var(--or); }
   .founder-card { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px; text-align: center; }
   .founder-quote { border-left: 0; border-top: 2px solid var(--or); padding: 16px 0 0; }
 }
+
+/* --------------------------------------------------------------------------
+   Clients & collaborators — infinite logo ribbon
+   -------------------------------------------------------------------------- */
+.partners { border-top: 1px solid var(--border); }
+.partners .w { text-align: center; }
+.partners h2::before { margin-left: auto; margin-right: auto; }
+.mq-eyebrow { display: block; color: var(--or); font: 700 0.78rem "Archivo", sans-serif; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
+.marquee { overflow-x: auto; margin-top: 44px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); scrollbar-width: none; }
+.marquee::-webkit-scrollbar { display: none; }
+.marquee.run { overflow: hidden; }
+.mq-track { display: flex; width: max-content; }
+.mq-item { flex: 0 0 auto; width: 230px; height: 112px; margin-right: 20px; padding: 18px 24px; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; transition: border-color 0.3s ease, transform 0.3s ease; }
+.mq-item.dk { background: #000000; border-color: rgba(255, 255, 255, 0.22); }
+.mq-item img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.mq-item:hover { border-color: var(--or); transform: translateY(-4px); }
+.marquee.run .mq-track { animation: mq 50s linear infinite; }
+.marquee.run:hover .mq-track { animation-play-state: paused; }
+@keyframes mq { to { transform: translateX(-50%); } }
+@media (max-width: 860px) { .mq-item { width: 170px; height: 92px; margin-right: 14px; padding: 14px 16px; } .marquee.run .mq-track { animation-duration: 40s; } }
 
 .rv { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
 .rv.in { opacity: 1; transform: none; }

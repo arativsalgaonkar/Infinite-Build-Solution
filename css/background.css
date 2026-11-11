@@ -55,3 +55,13 @@ footer { z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   html::before, body::after { animation: none; }
 }
+
+/* ---------- hero banners: let the photo show through ----------
+   Old overlay went from 25% to 98% black, which hid most of the photo.
+   Now: light at the top, darker toward the bottom, plus a soft dark band on the
+   left behind the headline so the white text stays readable. */
+.bn::before {
+  background:
+    linear-gradient(90deg, rgba(10, 10, 10, .55) 0%, rgba(10, 10, 10, .22) 45%, transparent 75%),
+    linear-gradient(180deg, rgba(11, 11, 11, .08) 0%, rgba(11, 11, 11, .30) 45%, rgba(9, 9, 9, .88) 100%);
+}
